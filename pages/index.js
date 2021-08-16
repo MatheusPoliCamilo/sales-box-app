@@ -21,7 +21,6 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-
           <form action="">
             <div className='field'>
               <div className='control'>
@@ -50,6 +49,15 @@ export default function Home() {
               </div>
             </div>
           </form>
+
+          <nav className="level ml-6">
+            <div className="level-item has-text-centered">
+              <div>
+                <p className="heading title is-6">Total gross income</p>
+                <p className="title">R$ 0,00</p>
+              </div>
+            </div>
+          </nav>
         </div>
       </main>
 
