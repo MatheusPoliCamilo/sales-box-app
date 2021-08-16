@@ -70,6 +70,7 @@ export default function Home() {
               <div className="level-item has-text-centered">
                 <div>
                   <p className="heading title is-6">Total gross income</p>
+                  <p className="heading title is-6">Last import</p>
                   <p className="title">R$ 0,00</p>
                 </div>
               </div>
@@ -79,13 +80,13 @@ export default function Home() {
         </div>
 
         <nav className="level mt-6 pt-5">
-            <div className="level-item has-text-centered">
-              <div>
-                <p className="heading title is-5">Total all-time gross income</p>
-                <p className="title">R$ 0,00</p>
-              </div>
+          <div className="level-item has-text-centered">
+            <div>
+              <p className="heading title is-5">Total all-time gross income</p>
+              <p className="title">R$ 0,00</p>
             </div>
-          </nav>
+          </div>
+        </nav>
       </main>
     </div>
   )
