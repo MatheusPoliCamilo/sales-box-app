@@ -7,7 +7,16 @@ import { useEffect, useState } from 'react'
 
 export default function Home() {
   const [totalGrossIncome, setTotalGrossIncome] = useState(0.0)
-  const [allTotalGrossIncome, setAllTotalGrossIncome] = useState(0.0)
+  const [totalAllTimeGrossIncome, setTotalAllTimeGrossIncome] = useState(0.0)
+
+  useEffect(() => {
+    fetch(`/api/total_all_time_gross_income`)
+    .then((response) => {
+      response.json().then(({ totalAllTimeGrossIncome }) => {
+        setTotalAllTimeGrossIncome(totalAllTimeGrossIncome)
+      })
+    })
+  }, [totalGrossIncome])
 
   return (
     <div className={styles.container}>
@@ -110,7 +119,7 @@ export default function Home() {
           <div className="level-item has-text-centered">
             <div>
               <p className="heading title is-5">Total all-time gross income</p>
-              <p className="title">R$ {allTotalGrossIncome}</p>
+              <p className="title">R$ {totalAllTimeGrossIncome}</p>
             </div>
           </div>
         </nav>
