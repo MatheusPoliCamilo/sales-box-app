@@ -1,8 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
+import { useEffect, useState } from 'react'
 
 export default function Home() {
+  const [totalGrossIncome, setTotalGrossIncome] = useState(0.0)
+  const [allTotalGrossIncome, setAllTotalGrossIncome] = useState(0.0)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -23,12 +29,33 @@ export default function Home() {
 
         <div className='columns mt-6'>
           <div className='column'>
-            <form action="">
+            <form onSubmit={(event) => {
+              event.preventDefault()
+              const importButton = document.querySelector('#import-button')
+
+              importButton.classList.add('is-loading')
+
+              const file = document.querySelector('.file-input').files[0]
+
+              const formData = new FormData()
+              formData.append('file', file)
+
+              fetch(`/api/company_sales`, {
+                method: 'POST',
+                body: formData,
+              }).then((response) => {
+                response.json().then(({ companySale }) => {
+                  setTotalGrossIncome(companySale.total_gross_income)
+                })
+              }).then(() => {
+                importButton.classList.remove('is-loading')
+              })
+            }}>
               <div className='field'>
                 <div className='control'>
                   <div className="file is-large is-link has-name is-boxed">
                     <label className="file-label">
-                      <input className="file-input" type="file" name="resume" onChange={(event) => {
+                      <input className="file-input" type="file" name="file" onChange={(event) => {
                         const fileName = document.querySelector('.file-name');
 
                         if (event.target.files.length > 0) {
@@ -57,7 +84,7 @@ export default function Home() {
 
               <div className='field is-flex is-justify-content-center'>
                 <div className='control'>
-                  <button className='button is-large is-link'>Import</button>
+                  <button className='button is-large is-link' id='import-button'>Import</button>
                 </div>
               </div>
             </form>
@@ -71,7 +98,7 @@ export default function Home() {
                 <div>
                   <p className="heading title is-6">Total gross income</p>
                   <p className="heading title is-6">Last import</p>
-                  <p className="title">R$ 0,00</p>
+                  <p className="title">R$ {totalGrossIncome}</p>
                 </div>
               </div>
             </nav>
@@ -83,7 +110,7 @@ export default function Home() {
           <div className="level-item has-text-centered">
             <div>
               <p className="heading title is-5">Total all-time gross income</p>
-              <p className="title">R$ 0,00</p>
+              <p className="title">R$ {allTotalGrossIncome}</p>
             </div>
           </div>
         </nav>
