@@ -38,7 +38,9 @@ The NextJS server will run on `localhost:3001`.
 ## Improvements 📈
 
 1. Add tests to the project, it was not built using TDD.
-2. Add CI to the project.
-3. Add rules and plugins to eslint.
-4. Create a menu to view the company file imports.
-5. Create a menu to view the sales.
+2. Add end-to-end tests with Cypress.
+4. Add CI to the project.
+5. Change project to use TypeScript.
+6. Add rules and plugins to eslint.
+7. Create a menu to view the company file imports.
+8. Create a menu to view the sales.
