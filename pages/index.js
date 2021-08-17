@@ -47,16 +47,20 @@ export default function Home() {
               const formData = new FormData()
               formData.append('file', file)
 
-              fetch(`/api/company_sales`, {
-                method: 'POST',
-                body: formData,
-              }).then((response) => {
-                response.json().then(({ companySale }) => {
-                  setTotalGrossIncome(companySale.total_gross_income)
+              if (file) {
+                fetch(`/api/company_sales`, {
+                  method: 'POST',
+                  body: formData,
+                }).then((response) => {
+                  response.json().then(({ companySale }) => {
+                    setTotalGrossIncome(companySale.total_gross_income)
+                  })
+                }).then(() => {
+                  importButton.classList.remove('is-loading')
                 })
-              }).then(() => {
+              } else {
                 importButton.classList.remove('is-loading')
-              })
+              }
             }}>
               <div className='field'>
                 <div className='control'>
